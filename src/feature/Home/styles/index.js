@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -19,11 +20,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     color: 'white',
   },
-  checkBox:{
+  checkBox: {
     backgroundColor: 'grey',
     color: '#000',
     width: '20%',
-  }
+  },
 });
 
 export default styles;
