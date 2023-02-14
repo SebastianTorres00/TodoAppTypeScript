@@ -1,46 +1,52 @@
-// import { Fab, Icon } from "native-base";
-import React, {useState} from 'react';
-import {
-  View,
-  FlatList,
-  Text,
-  Button,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
-// import useChangeStatusTodo from '../hooks/useChangeStatusTodo';
-// import styles from '../styles';
-// import BouncyCheckbox from "react-native-bouncy-checkbox";
-import {useDispatch, useSelector} from 'react-redux';
-// import showAlert from '../utils/showAlert';
-import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {View, FlatList, Text, Button, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
 import useChangeStatusTodo from '../hooks/useChangeStatusTodo';
 import styles from '../styles';
-import showAlert from '../utils/showAlert';
 
-const Home = ({navigation}) => {
-  // const navigation = useNavigation();
-  const dispatch = useDispatch();
+type Todo = {
+  title: string;
+  id: number;
+};
+
+type TodosStore = {
+  listTodoReducer: Todo[];
+};
+
+type NavigationInt = {
+  navigation: {
+    navigate: (route: string, params?: object) => void;
+  };
+};
+
+const Home = ({navigation}: NavigationInt) => {
   useChangeStatusTodo();
-  const {listTodoReducer} = useSelector(state => state);
+  const listTodoReducer = useSelector(
+    (state: TodosStore) => state.listTodoReducer,
+  );
+  console.log('listTodoReducer', listTodoReducer);
+
   const onPressNav = () => navigation.navigate('AddTodo');
 
-  const onPressDeleteTodo = todoToDelete => {
-    const newListTodo = [];
+  const onPressDeleteTodo = (todoToDelete: Todo) => {
+    const saveNewListTodo: Todo[] = [];
     listTodoReducer.map(item => {
-      if (item?.id !== todoToDelete?.id) newListTodo.push(item);
-    });
-    showAlert(dispatch, newListTodo);
+      if (item?.id !== todoToDelete?.id) {
+        saveNewListTodo.push(item);
+      }
+    }); // cambiar a filter - Agregar labels
+    navigation.navigate('DeleteTodo', {saveNewListTodo});
   };
-  // const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-  const onPressEditTodo = item => navigation.navigate('EditTodo', {item});
+  const onPressEditTodo = (item: any) =>
+    navigation.navigate('EditTodo', {item});
 
-  const renderItem = ({item}) => (
+  const renderItem = ({item}: {item: Todo}) => (
     <View style={styles.containerViewCheckBox}>
       <Text style={styles.title}>{item.title}</Text>
       <View>
         <TouchableOpacity
+          testID="test_delete_todo"
           onPress={() => onPressDeleteTodo(item)}
           style={styles.checkBox}
           accessibilityLabel="Learn more about this purple button">
@@ -61,7 +67,6 @@ const Home = ({navigation}) => {
       <FlatList
         data={listTodoReducer}
         renderItem={renderItem}
-        keyExtractor={listTodoReducer => listTodoReducer.id}
         extraData={listTodoReducer}
       />
       <Button
