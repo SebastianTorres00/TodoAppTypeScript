@@ -24,7 +24,6 @@ const Home = ({navigation}: NavigationInt) => {
   const listTodoReducer = useSelector(
     (state: TodosStore) => state.listTodoReducer,
   );
-  console.log('listTodoReducer', listTodoReducer);
 
   const onPressNav = () => navigation.navigate('AddTodo');
 
@@ -38,8 +37,9 @@ const Home = ({navigation}: NavigationInt) => {
     navigation.navigate('DeleteTodo', {saveNewListTodo});
   };
 
-  const onPressEditTodo = (item: any) =>
+  const onPressEditTodo = (item: Todo) => {
     navigation.navigate('EditTodo', {item});
+  };
 
   const renderItem = ({item}: {item: Todo}) => (
     <View style={styles.containerViewCheckBox}>
@@ -53,6 +53,7 @@ const Home = ({navigation}: NavigationInt) => {
           <Text>ELIMINAR</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          testID="test_edit_todo"
           onPress={() => onPressEditTodo(item)}
           style={styles.checkBox}
           accessibilityLabel="Learn more about this purple button">

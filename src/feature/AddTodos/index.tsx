@@ -1,8 +1,8 @@
 import React from 'react';
 import FormAddTodo from './components/FormAddTodo';
 
-const AddTodo = ({navigation}) => {
-  return <FormAddTodo navigation={navigation} />;
+const AddTodo = () => {
+  return <FormAddTodo />;
 };
 
 export default AddTodo;
