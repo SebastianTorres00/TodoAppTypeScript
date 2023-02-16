@@ -13,6 +13,8 @@ const FormAddTodo = () => {
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
+        placeholder="Tarea nueva"
+        testID="input-text-add-todo-test"
       />
       {isTodoAdd && (
         <Text style={{textAlign: 'center', fontSize: 22, color: '#000'}}>
