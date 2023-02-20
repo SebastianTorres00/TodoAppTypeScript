@@ -19,8 +19,6 @@ export type Props = {
 };
 // FC<Props> Tipeo componentes
 const FormEditTodo: FC<Props> = ({route}) => {
-  console.log('ROUTUTUU', route);
-
   const {text, onChangeText, onPressEditTodo, isTodoEdit} = useFormEditTodo(
     route.params.item,
   );

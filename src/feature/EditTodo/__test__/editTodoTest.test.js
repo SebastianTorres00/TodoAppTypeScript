@@ -2,9 +2,9 @@ import React from 'react';
 import {act, fireEvent, render, screen} from '@testing-library/react-native';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
-import FormEditTodo, {Props} from '../components/FormEditTodo';
+import FormEditTodo from '../components/FormEditTodo';
 import store from '../../../app/store';
-import {EDIT_TODO} from '../../../app/types';
+
 const mockRoute = {
   params: {
     item: {
@@ -14,6 +14,11 @@ const mockRoute = {
     },
   },
 };
+
+jest.spyOn(store, 'dispatch').mockReturnValue({
+  type: 'EDIT_TODO',
+  payload: {id: 1, title: 'NuevaTodo'},
+});
 
 const setup = () => {
   render(
@@ -48,5 +53,16 @@ describe('FormEditTodo', () => {
     });
 
     expect(input.props.value).toEqual('Sandia y Melon <3');
+  });
+  it('Se modifica la todo ', () => {
+    setup();
+    const input = screen.getByPlaceholderText('Agrega una TODO');
+    fireEvent.changeText(input, 'NuevaTodo');
+    const editButton = screen.getByText('Editar TODO');
+    fireEvent.press(editButton);
+    const actions = [store.dispatch.mock.results[0].value];
+    expect(actions).toEqual([
+      {type: 'EDIT_TODO', payload: {id: 1, title: 'NuevaTodo'}},
+    ]);
   });
 });

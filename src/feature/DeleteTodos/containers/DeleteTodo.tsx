@@ -20,7 +20,7 @@ const DeleteTodo = ({route}: Route) => {
 
   const onPressDeleteTodo = () => {
     dispatch(deleteTodo(saveNewListTodo));
-    navigation.goBack();
+    navigation.navigate('Home');
   };
 
   const dispatch = useDispatch();
@@ -51,11 +51,13 @@ const DeleteTodo = ({route}: Route) => {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
+          testID="test-delete-todo"
           style={{backgroundColor: 'green', width: 100, alignItems: 'center'}}
           onPress={() => onPressDeleteTodo()}>
           <Text>Eliminar</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          testID="test-goBack-delete-todo"
           style={{
             backgroundColor: 'green',
             width: 100,

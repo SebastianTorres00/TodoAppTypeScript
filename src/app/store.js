@@ -5,7 +5,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import listTodoReducer from '../app/reducer';
 
 const rootReducer = combineReducers({listTodoReducer});
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
-const middleware = composeWithDevTools(applyMiddleware(thunk));
-
-export default createStore(rootReducer, middleware);
+export default store;

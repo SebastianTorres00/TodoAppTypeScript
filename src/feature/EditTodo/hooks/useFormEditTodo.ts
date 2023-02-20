@@ -22,8 +22,6 @@ const useFormAddTodo = (todoSelected: Todo) => {
   const [text, onChangeText] = useState(title);
   const allTodos = listTodoReducer;
   const dispatch = useDispatch();
-  console.log('listTodoReducer', listTodoReducer);
-  console.log('Array.isArray([])', Array.isArray(listTodoReducer));
 
   if (Array.isArray(listTodoReducer)) {
     listTodoReducer.map((item, index) => {
