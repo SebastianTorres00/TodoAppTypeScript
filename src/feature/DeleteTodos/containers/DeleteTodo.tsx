@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-// const {View, Text, TouchableOpacity} = require('react-native');
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Text, TouchableOpacity, View} from 'react-native';
@@ -16,6 +14,7 @@ type Route = {
 
 const DeleteTodo = ({route}: Route) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const saveNewListTodo = route.params.saveNewListTodo;
 
   const onPressDeleteTodo = () => {
@@ -23,12 +22,15 @@ const DeleteTodo = ({route}: Route) => {
     navigation.navigate('Home');
   };
 
-  const dispatch = useDispatch();
+  const goBackNavigate = () => {
+    navigation.navigate('Home');
+  };
+
   return (
     <View
       style={{
         position: 'absolute',
-        dispaly: 'flex',
+        display: 'flex',
         justifyContent: 'center',
         width: 420,
         padding: 24,
@@ -53,7 +55,7 @@ const DeleteTodo = ({route}: Route) => {
         <TouchableOpacity
           testID="test-delete-todo"
           style={{backgroundColor: 'green', width: 100, alignItems: 'center'}}
-          onPress={() => onPressDeleteTodo()}>
+          onPress={onPressDeleteTodo}>
           <Text>Eliminar</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -64,7 +66,7 @@ const DeleteTodo = ({route}: Route) => {
             alignItems: 'center',
             marginLeft: 10,
           }}
-          onPress={() => navigation.goBack()}>
+          onPress={goBackNavigate}>
           <Text>Cancelar</Text>
         </TouchableOpacity>
       </View>

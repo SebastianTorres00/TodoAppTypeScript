@@ -64,7 +64,7 @@ const Home = ({navigation}: NavigationInt) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="test-home-screen">
       <FlatList
         data={listTodoReducer}
         renderItem={renderItem}
