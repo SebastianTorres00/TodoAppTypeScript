@@ -20,7 +20,7 @@ const useFormAddTodo = () => {
   const [text, onChangeText] = useState('');
   const [isTodoAdd, setIsTodoAdd] = useState(false);
   const idNew = Math.floor(Math.random() * 100);
-  const newTodo = {title: text, isFinish: false, id: idNew};
+  const newTodo = {title: text, isFinish: false, id: 444};
   const dispatch = useDispatch();
   const onPressTodoList = () => {
     dispatch(addTodo([...listTodoReducer, newTodo]));

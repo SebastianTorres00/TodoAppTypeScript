@@ -21,7 +21,10 @@ const FormAddTodo = () => {
           Tarea agregada!!!
         </Text>
       )}
-      <TouchableOpacity style={styles.buttonForm} onPress={onPressTodoList}>
+      <TouchableOpacity
+        testID="btn-add-todo"
+        style={styles.buttonForm}
+        onPress={onPressTodoList}>
         <Text>Add TODO</Text>
       </TouchableOpacity>
     </View>
