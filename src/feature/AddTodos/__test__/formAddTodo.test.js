@@ -25,7 +25,7 @@ const setup = () => {
 //
 
 describe('FormAddTodo', () => {
-  it('should render the input and button', () => {
+  it('Se teiene que renderizar el input y btn', () => {
     setup();
     const input = screen.getByTestId('input-text-add-todo-test');
     const button = screen.getByText('Add TODO');
@@ -34,7 +34,7 @@ describe('FormAddTodo', () => {
     expect(button).toBeDefined();
   });
 
-  it('should update the text input on change', () => {
+  it('modificar input', () => {
     setup();
     const input = screen.getByTestId('input-text-add-todo-test');
 
@@ -43,7 +43,7 @@ describe('FormAddTodo', () => {
     expect(input.props.value).toBe('New task');
   });
 
-  it('should call onPressTodoList when button is pressed', () => {
+  it('Se agrega una todo', () => {
     setup();
     const button = screen.getByTestId('btn-add-todo');
     fireEvent.press(button);
